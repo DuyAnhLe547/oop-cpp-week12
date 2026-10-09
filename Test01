@@ -9,6 +9,42 @@ private:
     string name;
     string color;
     string characteristic;
+//2. Implement Constructors
+public:
+    Fish(){
+        id = 0;
+        name = "";
+        color = "";
+        characteristic = "";
+    }
+
+    Fish(int ID){
+        id = ID;
+        name = "";
+        color = "";
+        characteristic = "";
+    }
+
+    Fish(int ID, string Name){
+        id = ID;
+        name = Name;
+        color = "";
+        characteristic = "";
+    }
+
+    Fish(int ID, string Name, string Color){
+        id = ID;
+        name = Name;
+        color = Color;
+        characteristic = "";
+    }
+
+    Fish(int ID, string Name, string Color, string charac){
+        id = ID;
+        name = Name;
+        color = Color;
+        characteristic = charac;
+    }
 
 };
 
