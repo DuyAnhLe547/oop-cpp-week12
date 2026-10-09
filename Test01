@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <limits>
 
 using namespace std;
 
@@ -338,97 +339,74 @@ void displayFishByColor(vector<Fish> fishList) {
     }
 }
 
+    
 int main() {
-    Fish f1;
-    Fish f2(2);
-    Fish f3(3, "Ca vang");
-    Fish f4(4, "Ca lia thia", "Xanh duong");
-    Fish f5(5, "Ca Koi", "Cam", "Nang dong");
+    int id, day, month, year;
+    string name, address, owner;
 
-    vector<Fish> fishList = {
-        f1,
-        f2,
-        f3,
-        f4,
-        f5,
-        Fish(6, "Ca bay mau", "Vang", "Nho"),
-        Fish(7, "Ca lia thia", "Xanh duong", "Hung du"),
-        Fish(8, "Ca Koi", "Cam", "Nang dong"),
-        Fish(9, "Ca vang", "Cam", "Hien lanh"),
-        Fish(10, "Ca molly", "Den", "Hien lanh"),
-        Fish(11, "Ca tetra", "Xanh duong", "Nho"),
-        Fish(12, "Ca than tien", "Bac", "Diem tinh"),
-        Fish(13, "Ca dia", "Do", "Nhieu mau sac"),
-        Fish(14, "Ca platy", "Vang", "Hien lanh"),
-        Fish(15, "Ca Oscar", "Den", "Co tinh lanh tho")
-    };
+    cout << "Enter shop ID: ";
+    cin >> id;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-    fishList[0].setId(1);
-    fishList[0].setName("Ca Koi Nhat Ban");
-    fishList[0].setColor("Do va trang");
-    fishList[0].setCharacteristic("Tinh nghich");
+    cout << "Enter shop name: ";
+    getline(cin, name);
 
-    for (int i = 0; i < 5; i++) {
-        fishList[i].displayFishInfo();
-        cout << endl;
-    }
+    cout << "Enter shop address: ";
+    getline(cin, address);
 
-    cout << "Updated fish information:" << endl;
-    cout << "ID: " << fishList[0].getId() << endl;
-    cout << "Name: " << fishList[0].getName() << endl;
-    cout << "Color: " << fishList[0].getColor() << endl;
-    cout << "Characteristic: " << fishList[0].getCharac() << endl;
+    cout << "Enter shop owner: ";
+    getline(cin, owner);
 
-    fishList[0].displayFishInfo();
+    cout << "Enter start date (day month year): ";
+    cin >> day >> month >> year;
 
-    cout << "Fish grouped by color:" << endl;
-    displayFishByColor(fishList);
+    FishShop shop(id, name, address, owner, Date(day, month, year));
 
-    vector<Category> categories = {
-        Category(1, "Ca canh nho", "Cac loai ca kich thuoc nho"),
-        Category(2, "Ca canh mau sac", "Cac loai ca co mau sac noi bat"),
-        Category(3, "Ca canh ho ca lon", "Cac loai ca phu hop ho ca lon")
-    };
+    for (int i = 0; i < 4; i++) {
+        int categoryId;
+        string categoryName, description;
 
-    for (int i = 0; i < fishList.size(); i++) {
-        int id = fishList[i].getId();
+        cout << "\nEnter category ID: ";
+        cin >> categoryId;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-        if (id == 6 || id == 11 || id == 14) {
-            fishList[i].setCategoryId(1);
-        }
-        else if (id == 1 || id == 3 || id == 5 ||
-                 id == 8 || id == 13) {
-            fishList[i].setCategoryId(2);
-        }
-        else {
-            fishList[i].setCategoryId(3);
+        cout << "Enter category name: ";
+        getline(cin, categoryName);
+
+        cout << "Enter category description: ";
+        getline(cin, description);
+
+        Category category(categoryId, categoryName, description);
+        shop.addCategory(category);
+
+        for (int j = 0; j < 10; j++) {
+            int fishId;
+            string fishName, color, characteristic;
+
+            cout << "\nEnter fish ID: ";
+            cin >> fishId;
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+            cout << "Enter fish name: ";
+            getline(cin, fishName);
+
+            cout << "Enter fish color: ";
+            getline(cin, color);
+
+            cout << "Enter fish characteristic: ";
+            getline(cin, characteristic);
+
+            Fish fish(fishId, fishName, color, characteristic);
+            fish.setCategoryId(categoryId);
+
+            shop.addFish(fish);
         }
     }
 
-    cout << "All categories:" << endl;
-
-    for (int i = 0; i < categories.size(); i++) {
-        categories[i].displayCategoryInfo();
-        cout << endl;
-    }
-
-    int selectedCategoryId;
-    cout << "Enter category ID: ";
-    cin >> selectedCategoryId;
-
-    bool found = false;
-
-    for (int i = 0; i < fishList.size(); i++) {
-        if (fishList[i].getCategoryId() == selectedCategoryId) {
-            fishList[i].displayFishInfo();
-            cout << endl;
-            found = true;
-        }
-    }
-
-    if (!found) {
-        cout << "No fish found in this category." << endl;
-    }
+    shop.displayFishShopInfo();
 
     return 0;
 }
+
+
+
