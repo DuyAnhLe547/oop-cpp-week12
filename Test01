@@ -46,6 +46,40 @@ public:
         characteristic = charac;
     }
 
+    //3. Implement Getter and Setter Methods
+    int getId(){
+        return id;
+    }
+
+    string getName(){
+        return name;
+    }
+
+    string getColor(){
+        return color;
+    }
+
+    string getCharac(){
+        return characteristic;
+    }
+
+    void setId(int i) {
+        id = i;
+    }
+
+    void setName(string n) {
+        name = n;
+    }
+
+    void setColor(string c) {
+        color = c;
+    }
+
+    void setCharacteristic(string ch) {
+        characteristic = ch;
+    }
+
+
 };
 
 
