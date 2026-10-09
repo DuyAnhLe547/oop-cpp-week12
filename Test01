@@ -1,0 +1,22 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+//1. Define the Fish class 
+class Fish{
+private:
+    int id;
+    string name;
+    string color;
+    string characteristic;
+
+};
+
+
+
+
+
+
+
+
+
