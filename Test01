@@ -89,7 +89,48 @@ public:
     }
 };
 
+//5. implement the main function
+int main(){
+// 1.
+    Fish f1;
+    Fish f2(2);
+    Fish f3(3, "goldfish");
+    Fish f4(4, "alpha", "blue");
+    Fish f5(5, "Koi", "orange", "active");
 
+// 2.
+    f1.displayFishInfo();
+    cout << endl;
+
+    f2.displayFishInfo();
+    cout << endl;
+
+    f3.displayFishInfo();
+    cout << endl;
+
+    f4.displayFishInfo();
+    cout << endl;
+
+    f5.displayFishInfo();
+
+// 3.
+    f1.setName("Japanese Koi");
+    f1.setColor("Red and white");
+    f1.setCharacteristic("Swims actively");
+
+// 4.
+    cout << "ID: " << f1.getId() << endl;
+    cout << "Name: " << f1.getName() << endl;
+    cout << "Color: " << f1.getColor() << endl;
+    cout << "Characteristic: " << f1.getCharac() << endl;
+
+// 5.
+    f5.displayFishInfo();
+
+
+    return 0;
+
+}
 
 
 
