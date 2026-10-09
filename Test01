@@ -1,66 +1,75 @@
 #include <iostream>
 #include <string>
+#include <vector>
 using namespace std;
 
-//1. Define the Fish class 
-class Fish{
+class Fish {
 private:
     int id;
     string name;
     string color;
     string characteristic;
-//2. Implement Constructors
+    int categoryId;
+
 public:
-    Fish(){
+    Fish() {
         id = 0;
         name = "";
         color = "";
         characteristic = "";
+        categoryId = 0;
     }
 
-    Fish(int ID){
+    Fish(int ID) {
         id = ID;
         name = "";
         color = "";
         characteristic = "";
+        categoryId = 0;
     }
 
-    Fish(int ID, string Name){
+    Fish(int ID, string Name) {
         id = ID;
         name = Name;
         color = "";
         characteristic = "";
+        categoryId = 0;
     }
 
-    Fish(int ID, string Name, string Color){
+    Fish(int ID, string Name, string Color) {
         id = ID;
         name = Name;
         color = Color;
         characteristic = "";
+        categoryId = 0;
     }
 
-    Fish(int ID, string Name, string Color, string charac){
+    Fish(int ID, string Name, string Color, string charac) {
         id = ID;
         name = Name;
         color = Color;
         characteristic = charac;
+        categoryId = 0;
     }
 
-    //3. Implement Getter and Setter Methods
-    int getId(){
+    int getId() {
         return id;
     }
 
-    string getName(){
+    string getName() {
         return name;
     }
 
-    string getColor(){
+    string getColor() {
         return color;
     }
 
-    string getCharac(){
+    string getCharac() {
         return characteristic;
+    }
+
+    int getCategoryId() {
+        return categoryId;
     }
 
     void setId(int i) {
@@ -79,64 +88,200 @@ public:
         characteristic = ch;
     }
 
-    //4. Implement a Method to Display Fish Information
-    void displayFishInfo(){
-        cout << "ID: " << id << endl;
-        cout << "name: " << name << endl;
-        cout << "color: " << color << endl;
-        cout << "characteristic: " << characteristic << endl;
+    void setCategoryId(int catId) {
+        categoryId = catId;
+    }
 
+    void displayFishInfo() {
+        cout << "ID: " << id << endl;
+        cout << "Name: " << name << endl;
+        cout << "Color: " << color << endl;
+        cout << "Characteristic: " << characteristic << endl;
+        cout << "Category ID: " << categoryId << endl;
     }
 };
 
-//5. implement the main function
-int main(){
-// 1.
-    Fish f1;
-    Fish f2(2);
-    Fish f3(3, "goldfish");
-    Fish f4(4, "alpha", "blue");
-    Fish f5(5, "Koi", "orange", "active");
+class Category {
+private:
+    int CategoryId;
+    string CategoryName;
+    string Description;
 
-// 2.
-    f1.displayFishInfo();
-    cout << endl;
+public:
+    Category() {
+        CategoryId = 0;
+        CategoryName = "";
+        Description = "";
+    }
 
-    f2.displayFishInfo();
-    cout << endl;
+    Category(int ID) {
+        CategoryId = ID;
+        CategoryName = "";
+        Description = "";
+    }
 
-    f3.displayFishInfo();
-    cout << endl;
+    Category(int ID, string Name) {
+        CategoryId = ID;
+        CategoryName = Name;
+        Description = "";
+    }
 
-    f4.displayFishInfo();
-    cout << endl;
+    Category(int ID, string Name, string description) {
+        CategoryId = ID;
+        CategoryName = Name;
+        Description = description;
+    }
 
-    f5.displayFishInfo();
+    int getCategoryId() {
+        return CategoryId;
+    }
 
-// 3.
-    f1.setName("Japanese Koi");
-    f1.setColor("Red and white");
-    f1.setCharacteristic("Swims actively");
+    string getCategoryName() {
+        return CategoryName;
+    }
 
-// 4.
-    cout << "ID: " << f1.getId() << endl;
-    cout << "Name: " << f1.getName() << endl;
-    cout << "Color: " << f1.getColor() << endl;
-    cout << "Characteristic: " << f1.getCharac() << endl;
+    string getDescription() {
+        return Description;
+    }
 
-// 5.
-    f5.displayFishInfo();
+    void setCategoryId(int i) {
+        CategoryId = i;
+    }
 
+    void setCategoryName(string n) {
+        CategoryName = n;
+    }
 
-    return 0;
+    void setDescription(string c) {
+        Description = c;
+    }
 
+    void displayCategoryInfo() {
+        cout << "Category ID: " << CategoryId << endl;
+        cout << "Category Name: " << CategoryName << endl;
+        cout << "Description: " << Description << endl;
+    }
+};
+
+void displayFishByColor(vector<Fish> fishList) {
+    vector<string> displayedColors;
+
+    for (int i = 0; i < fishList.size(); i++) {
+        string color = fishList[i].getColor();
+        bool appeared = false;
+
+        for (int j = 0; j < displayedColors.size(); j++) {
+            if (displayedColors[j] == color) {
+                appeared = true;
+                break;
+            }
+        }
+
+        if (!appeared) {
+            cout << "Color: " << color << endl;
+            displayedColors.push_back(color);
+
+            for (int j = 0; j < fishList.size(); j++) {
+                if (fishList[j].getColor() == color) {
+                    fishList[j].displayFishInfo();
+                    cout << endl;
+                }
+            }
+        }
+    }
 }
 
+int main() {
+    Fish f1;
+    Fish f2(2);
+    Fish f3(3, "Ca vang");
+    Fish f4(4, "Ca lia thia", "Xanh duong");
+    Fish f5(5, "Ca Koi", "Cam", "Nang dong");
 
+    vector<Fish> fishList = {
+        f1,
+        f2,
+        f3,
+        f4,
+        f5,
+        Fish(6, "Ca bay mau", "Vang", "Nho"),
+        Fish(7, "Ca lia thia", "Xanh duong", "Hung du"),
+        Fish(8, "Ca Koi", "Cam", "Nang dong"),
+        Fish(9, "Ca vang", "Cam", "Hien lanh"),
+        Fish(10, "Ca molly", "Den", "Hien lanh"),
+        Fish(11, "Ca tetra", "Xanh duong", "Nho"),
+        Fish(12, "Ca than tien", "Bac", "Diem tinh"),
+        Fish(13, "Ca dia", "Do", "Nhieu mau sac"),
+        Fish(14, "Ca platy", "Vang", "Hien lanh"),
+        Fish(15, "Ca Oscar", "Den", "Co tinh lanh tho")
+    };
 
+    fishList[0].setId(1);
+    fishList[0].setName("Ca Koi Nhat Ban");
+    fishList[0].setColor("Do va trang");
+    fishList[0].setCharacteristic("Tinh nghich");
 
+    for (int i = 0; i < 5; i++) {
+        fishList[i].displayFishInfo();
+        cout << endl;
+    }
 
+    cout << "Updated fish information:" << endl;
+    cout << "ID: " << fishList[0].getId() << endl;
+    cout << "Name: " << fishList[0].getName() << endl;
+    cout << "Color: " << fishList[0].getColor() << endl;
+    cout << "Characteristic: " << fishList[0].getCharac() << endl;
 
+    fishList[0].displayFishInfo();
 
+    cout << "Fish grouped by color:" << endl;
+    displayFishByColor(fishList);
 
+    vector<Category> categories = {
+        Category(1, "Ca canh nho", "Cac loai ca kich thuoc nho"),
+        Category(2, "Ca canh mau sac", "Cac loai ca co mau sac noi bat"),
+        Category(3, "Ca canh ho ca lon", "Cac loai ca phu hop ho ca lon")
+    };
 
+    for (int i = 0; i < fishList.size(); i++) {
+        int id = fishList[i].getId();
+
+        if (id == 6 || id == 11 || id == 14) {
+            fishList[i].setCategoryId(1);
+        }
+        else if (id == 1 || id == 3 || id == 5 ||
+                 id == 8 || id == 13) {
+            fishList[i].setCategoryId(2);
+        }
+        else {
+            fishList[i].setCategoryId(3);
+        }
+    }
+
+    cout << "All categories:" << endl;
+
+    for (int i = 0; i < categories.size(); i++) {
+        categories[i].displayCategoryInfo();
+        cout << endl;
+    }
+
+    int selectedCategoryId;
+    cout << "Enter category ID: ";
+    cin >> selectedCategoryId;
+
+    bool found = false;
+
+    for (int i = 0; i < fishList.size(); i++) {
+        if (fishList[i].getCategoryId() == selectedCategoryId) {
+            fishList[i].displayFishInfo();
+            cout << endl;
+            found = true;
+        }
+    }
+
+    if (!found) {
+        cout << "No fish found in this category." << endl;
+    }
+
+    return 0;
+}
