@@ -1,7 +1,32 @@
 #include <iostream>
 #include <string>
 #include <vector>
+
 using namespace std;
+
+class Date {
+private:
+    int day;
+    int month;
+    int year;
+
+public:
+    Date() {
+        day = 1;
+        month = 1;
+        year = 2000;
+    }
+
+    Date(int d, int m, int y) {
+        day = d;
+        month = m;
+        year = y;
+    }
+
+    void displayDate() {
+        cout << day << "/" << month << "/" << year;
+    }
+};
 
 class Fish {
 private:
@@ -161,6 +186,17 @@ public:
         cout << "Category Name: " << CategoryName << endl;
         cout << "Description: " << Description << endl;
     }
+};
+
+class FishShop {
+private:
+    int id;
+    string name;
+    string address;
+    string owner;
+    Date startdate;
+    vector<Category> categories;
+    vector<Fish> fishes;
 };
 
 void displayFishByColor(vector<Fish> fishList) {
