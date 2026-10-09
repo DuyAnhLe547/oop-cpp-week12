@@ -197,6 +197,117 @@ private:
     Date startdate;
     vector<Category> categories;
     vector<Fish> fishes;
+
+public:
+    FishShop() {
+        id = 0;
+        name = "";
+        address = "";
+        owner = "";
+    }
+
+    FishShop(int ID, string Name, string Address, string Owner, Date Startdate) {
+        id = ID;
+        name = Name;
+        address = Address;
+        owner = Owner;
+        startdate = Startdate;
+    }
+
+    int getId() {
+        return id;
+    }
+
+    string getName() {
+        return name;
+    }
+
+    string getAddress() {
+        return address;
+    }
+
+    string getOwner() {
+        return owner;
+    }
+
+    Date getStartdate() {
+        return startdate;
+    }
+
+    vector<Category> getCategories() {
+        return categories;
+    }
+
+    vector<Fish> getFishes() {
+        return fishes;
+    }
+
+    void setId(int i) {
+        id = i;
+    }
+
+    void setName(string n) {
+        name = n;
+    }
+
+    void setAddress(string a) {
+        address = a;
+    }
+
+    void setOwner(string o) {
+        owner = o;
+    }
+
+    void setStartdate(Date d) {
+        startdate = d;
+    }
+
+    void setCategories(vector<Category> c) {
+        categories = c;
+    }
+
+    void setFishes(vector<Fish> f) {
+        fishes = f;
+    }
+
+    void addCategory(Category c) {
+        categories.push_back(c);
+    }
+
+    void addFish(Fish f) {
+        fishes.push_back(f);
+    }
+
+    void displayFishShopInfo() {
+        cout << "Shop ID: " << id << endl;
+        cout << "Shop Name: " << name << endl;
+        cout << "Address: " << address << endl;
+        cout << "Owner: " << owner << endl;
+        cout << "Start Date: ";
+        startdate.displayDate();
+        cout << endl;
+
+        for (int i = 0; i < categories.size(); i++) {
+            cout << "\n";
+            categories[i].displayCategoryInfo();
+
+            cout << "Fishes in this category:" << endl;
+
+            bool found = false;
+
+            for (int j = 0; j < fishes.size(); j++) {
+                if (fishes[j].getCategoryId() == categories[i].getCategoryId()) {
+                    fishes[j].displayFishInfo();
+                    cout << endl;
+                    found = true;
+                }
+            }
+
+            if (!found) {
+                cout << "khong tim thay trong danh muc" << endl;
+            }
+        }
+    }
 };
 
 void displayFishByColor(vector<Fish> fishList) {
