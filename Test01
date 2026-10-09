@@ -79,8 +79,17 @@ public:
         characteristic = ch;
     }
 
+    //4. Implement a Method to Display Fish Information
+    void displayFishInfo(){
+        cout << "ID: " << id << endl;
+        cout << "name: " << name << endl;
+        cout << "color: " << color << endl;
+        cout << "characteristic: " << characteristic << endl;
 
+    }
 };
+
+
 
 
 
